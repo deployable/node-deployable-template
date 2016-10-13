@@ -1,4 +1,4 @@
-# {{ label }}
+# Deployable Node.js Module Template
 
-{{ name }} {{ description }}
+Quickly bootstrap a new deployable node module
 
