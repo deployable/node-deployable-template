@@ -11,8 +11,7 @@
     "url": "git+https://github.com/deployable/node-deployable-{{ name }}.git"
   },
   "keywords": [
-    "deployable",
-    {{ keywords_json }}
+    "deployable"
   ],
   "author": "Matt Hoyle <code@deployable.co>",
   "license": "MIT",
@@ -21,6 +20,8 @@
   },
   "homepage": "https://github.com/deployable/node-deployable-{{ name }}#readme",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-register": "^6.16.3",
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6"
