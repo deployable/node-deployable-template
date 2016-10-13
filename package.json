@@ -1,0 +1,32 @@
+{
+  "name": "deployable-{{ name }}",
+  "version": "0.1.0",
+  "description": "{{ description }}",
+  "main": "{{ name }}.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deployable/node-deployable-{{ name }}.git"
+  },
+  "keywords": [
+    "deployable",
+    {{ keywords_json }}
+  ],
+  "author": "Matt Hoyle <code@deployable.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deployable/node-deployable-{{ name }}/issues"
+  },
+  "homepage": "https://github.com/deployable/node-deployable-{{ name }}#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "mixwith": "^0.1.1"
+  }
+}
