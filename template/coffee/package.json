@@ -1,0 +1,29 @@
+{
+  "name": "{{ module_label }}",
+  "version": "0.1.0",
+  "description": "{{ module_name }} {{ module_description }}",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "{{ repo_url }}.git"
+  },
+  "keywords": {{ keywords_json_array }},
+  "author": "{{ dev_name }} <{{ dev_email }}>",
+  "license": "{{ license_name }}",
+  "bugs": {
+    "url": "{{ repo_url }}/issues"
+  },
+  "homepage": "{{ repo_url }}#readme",
+  "devDependencies": {
+    "coffee-script": "~1.11.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
+  }
+}

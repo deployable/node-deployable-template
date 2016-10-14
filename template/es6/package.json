@@ -1,0 +1,31 @@
+{
+  "name": "{{ name }}",
+  "version": "0.1.0",
+  "description": "{{ description }}",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+{{ git_url }}.git"
+  },
+  "keywords": {{ keywords_json_array }},
+  "author": "{{ dev_name }} <{{ dev_email }}>",
+  "license": "{{ module_license }}",
+  "bugs": {
+    "url": "{{ git_url }}/issues"
+  },
+  "homepage": "{{ gir_url }}#readme",
+  "devDependencies": {
+    "babel-cli": "~6.16.0",
+    "babel-register": "~6.16.3",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "mixwith": "~0.1.1"
+  }
+}
