@@ -1,19 +1,16 @@
 const TemplateSet = require('../lib/template_set')
 const Promise = require('bluebird')
-const path = require('path')
 const debug = require('debug')('dply::test::unit::module_template::template_set')
-const os = require('os')
-const fs = Promise.promisifyAll(require('fs'))
 
 
-describe('unit::module_template::template_set', function(){
+describe('unit::module_template::TemplateSet', function(){
 
   let desc_fixture_dir = path.join(__dirname, 'fixture')
   let desc_output_dir = path.join(__dirname, 'output')
   let desc_tmpoutput_dir_prefix = path.join(desc_output_dir, 'tmp-')
 
 
-  describe('TemplateSet creation', function(){
+  describe('Class creation', function(){
 
     it('should create an instance of TemplateSet', function(){
       let ts = new TemplateSet('base')
@@ -23,7 +20,7 @@ describe('unit::module_template::template_set', function(){
   })
 
 
-  describe('TemplateSet instance', function(){
+  describe('Class instance', function(){
 
     let ts = null
 
@@ -48,13 +45,41 @@ describe('unit::module_template::template_set', function(){
   })
 
 
-  describe('TemplateSet writing', function(){
+  describe('Mustache templating', function(){
+    let ts = null
+    let ts_vars = { 
+      name: 'mymod_name', 
+      description: 'mymod_desc',
+      dev_name: 'dname',
+      dev_email: 'e@b.c'
+    }
+
+    before(function(done) {
+      ts = new TemplateSet('base',{vars:ts_vars})
+      ts.findFiles().then(()=> done())
+    })
+
+    it('should replace {{vars}} in a template', function(){
+      let i = ts.files.indexOf('base/README.md')
+      let readme = ts.files[i]
+      if (!readme) throw new Error('no readme in files?')
+      ts.templateFile(readme).then(data => {
+        expect(data).to.equal("# mymod_name\n\nmymod_name mymod_desc\n\ndname e@b.c\n")
+      })
+    })
+
+  })
+
+
+  describe('File writing', function(){
 
     let desc_temp_output_dir = null
     let ts = null
 
+    // Create a temp output dir
     before(function(done){
       fs.mkdtempAsync(desc_tmpoutput_dir_prefix).then( tmpdir => {
+        desc_temp_output_dir = tmpdir
         ts = new TemplateSet('base', { output_path: tmpdir })
         ts.findFiles().then(()=> done())
       })
@@ -63,6 +88,11 @@ describe('unit::module_template::template_set', function(){
     it('should write out templates to dir', function(){
       return expect( ts.templateFiles() )
         .to.eventually.have.length( 8 )
+    })
+
+    // Clean up our tmp output
+    after(function(done){
+      fse.removeAsync(desc_temp_output_dir).then(done)
     })
 
   })
