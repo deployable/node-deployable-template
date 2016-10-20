@@ -1,3 +1,7 @@
 #!/usr/bin/env node
 
-require('../lib/deployable-module-template')
+// # `dmod`
+//
+// Simple shim to start the command line
+
+require('../lib/command_line')
