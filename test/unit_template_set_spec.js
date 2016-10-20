@@ -47,7 +47,7 @@ describe('unit::module_template::TemplateSet', function(){
 
   describe('Mustache templating', function(){
     let ts = null
-    let ts_vars = { 
+    let ts_properties = { 
       name: 'mymod_name', 
       description: 'mymod_desc',
       dev_name: 'dname',
@@ -55,11 +55,11 @@ describe('unit::module_template::TemplateSet', function(){
     }
 
     before(function(done) {
-      ts = new TemplateSet('base',{vars:ts_vars})
+      ts = new TemplateSet('base',{properties:ts_properties})
       ts.findFiles().then(()=> done())
     })
 
-    it('should replace {{vars}} in a template', function(){
+    it('should replace {{properties}} in a template', function(){
       let i = ts.files.indexOf('README.md')
       let readme = ts.files[i]
       if (!readme) throw new Error('No readme found in files array')
