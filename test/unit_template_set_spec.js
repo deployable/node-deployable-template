@@ -60,9 +60,9 @@ describe('unit::module_template::TemplateSet', function(){
     })
 
     it('should replace {{vars}} in a template', function(){
-      let i = ts.files.indexOf('base/README.md')
+      let i = ts.files.indexOf('README.md')
       let readme = ts.files[i]
-      if (!readme) throw new Error('no readme in files?')
+      if (!readme) throw new Error('No readme found in files array')
       ts.templateFile(readme).then(data => {
         expect(data).to.equal("# mymod_name\n\nmymod_name mymod_desc\n\ndname e@b.c\n")
       })
