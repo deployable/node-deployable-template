@@ -9,3 +9,8 @@ global.os = require('os')
 const Promise = require('bluebird')
 global.fs = Promise.promisifyAll(require('fs'))
 global.fse = Promise.promisifyAll(require('fs-extra'))
+
+Promise.config({
+  longStackTraces: true,
+  warnings: true
+})
