@@ -4,7 +4,9 @@
   "description": "Generate files from a template and properties",
   "main": "template.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:unit": "mocha test/unit_*_spec*",
+    "test:int": "mocha test/int_*_spec*"
   },
   "bin": {
     "dt": "lib/cli.js"
