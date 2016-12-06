@@ -1,0 +1,18 @@
+# docker build -f docker/Dockerfile -t dmod .
+#from node:6
+from mhart/alpine-node:6
+
+# Use yarn
+run npm install --no-cache --production -g yarn
+
+# Install app
+copy . /app
+workdir /app
+run set -uex; \
+    yarn install --verbose --prod --cache-folder ./cache; \
+    rm -rf ./cache; \
+    find /app
+ 
+entrypoint [ "/app/bin/dt" ]
+cmd [ "" ]
+
