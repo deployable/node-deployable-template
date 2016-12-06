@@ -1,9 +1,8 @@
 const TemplateSet = require('../lib/template_set')
-const Promise = require('bluebird')
-const debug = require('debug')('dply::test::unit::module_template::template_set')
+const debug = require('debug')('dply::test::unit::template::template_set')
 
 
-describe('unit::module_template::TemplateSet', function(){
+describe('Unit::template::TemplateSet', function(){
 
   let desc_fixture_dir = path.join(__dirname, 'fixture')
   let desc_output_dir = path.join(__dirname, 'output')

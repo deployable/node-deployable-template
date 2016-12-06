@@ -8,7 +8,7 @@ describe('unit::module_template::walk', function(){
   let desc_test_files = [ 'dir', 'dir/anotherfile', 'file' ]
   
   desc_test_files = [ 'dir/anotherfile', 'file' ]
-  let desc_test_file_paths = test_files.map(el => path.join(test_dir,el))
+  let desc_test_file_paths = desc_test_files.map(el => path.join(desc_test_dir, el))
 
   it('should walks files in fixture dir asynchronously',function(done){
     let errors = []

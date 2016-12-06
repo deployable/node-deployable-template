@@ -4,4 +4,5 @@
 //
 // Simple shim to start the command line
 
-require('../lib/command_line')
+require('../lib/command_line')(process.argv)
+

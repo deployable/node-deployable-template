@@ -1,0 +1,47 @@
+# # Template Config
+
+## Template metadata
+
+# Info about this template set
+
+template:
+  name: 'node-base'
+  version: '1.0.0'
+
+  # Parent template to include
+  parent: 'base'
+
+  # Action on conflict files
+  #  'merge'   Attempt to merge 
+  #  'replace' Replace by default
+  #  'error'   error on conflicts
+  #  'rules'   Rely on a rule, error otherwise
+#  parent_conflict: 'replace'
+
+
+# ## Properties 
+
+# Properties to be used in template replacements
+
+# These are defaults. Any properties provide in a file of command line
+# will override these. App will warn on any missing.
+
+properties:
+  name: 'node-base'
+  description: 'add description'
+  dev_name: 'Developer Name'
+  dev_email: 'dev@code.com'
+
+
+# Custom actions to run
+
+actions:
+  - log.debug: dosomething
+  - log.info: do otherthing
+  - log.error: oh no
+  - cmd: echo "test"
+  - cmd:
+      cwd: /tmp
+      workingDir: /tmp
+      run: 'ls -l'
+
