@@ -7,10 +7,11 @@ cd "$rundir"
 
 NAME=dt
 SCOPE=deployable
+FROM=mhart/alpine-node
 
 create_versions(){
+  cp Dockerfile.base Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
   cp Dockerfile.base Dockerfile.4; perl -pi -e 's/alpine-node:.+/alpine-node:4/' Dockerfile.4
-  cp Dockerfile.base Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.4
   cp Dockerfile.base Dockerfile.7; perl -pi -e 's/alpine-node:.+/alpine-node:7/' Dockerfile.7
 }
 
@@ -23,12 +24,22 @@ build() {
     $rundir/..
 }
 
+pull(){
+  docker pull $FROM:6
+}
+
+pull_all(){
+  pull
+  docker pull $FROM:7
+  docker pull $FROM:4
+}
+
 rebuild() {
   create_versions
   build 
   build 6
-  build 7
   build 4
+  build 7
 }
 
 clean(){
