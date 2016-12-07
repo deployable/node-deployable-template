@@ -161,10 +161,12 @@ describe('unit::template::config_file', function(){
 
     let desc_test_dir = path.join(__dirname, 'fixture')
 
-    it('should write a config file',function(){
+    it('should write a config file', function(){
       let file = path.join(desc_test_dir, 'config.out')
-      let cf = new ConfigFile(file)
-      expect( cf.writeFile() ).to.eql( desc_test_dir )
+      let cf = new ConfigFile({ path: file })
+      let write = cf.writeFile()
+      expect( write ).to.become(true)
+      return write
     })
 
   })
