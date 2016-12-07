@@ -10,9 +10,9 @@
     "type": "git",
     "url": "git+{{ git_url }}.git"
   },
-  "keywords": {{ keywords_json_array }},
+  "keywords": {{ json keywords_array_json }},
   "author": "{{ dev_name }} <{{ dev_email }}>",
-  "license": "{{ module_license }}",
+  "license": "{{ default module_license 'MIT' }}",
   "bugs": {
     "url": "{{ git_url }}/issues"
   },
@@ -25,7 +25,8 @@
     "sinon": "^1.17.6"
   },
   "dependencies": {
-    "debug": "^2.2.0",
+    "debug": "^2",
     "mixwith": "~0.1.1"
   }
 }
+

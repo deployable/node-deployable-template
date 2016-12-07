@@ -1,8 +1,8 @@
-import {{ name }} from '../{{ name }}'
+import {{ name }} from '../'
 
-describe('Int::{{ module }}', function(){
+describe('Unit::{{ name }}', function(){
 
-  describe('{{ something }}', function(){
+  describe('{{ name }} does something', function(){
   
     it('should do something with module', function(){
       expect( module.something ).to.equal( 1 )

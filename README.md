@@ -31,8 +31,9 @@ Build file from a template set, merging properties in.
 
     dt build node-express \
       --output . \
-      --set name=new-web-app \
-      --file ./properties.yml
+      --name new-web-app \
+      --file ./properties.yml \
+      --set description='Web app to do all the things'
 
 ### Help
 

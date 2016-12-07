@@ -1,0 +1,35 @@
+# # Template Config
+
+# ## Template metadata
+
+# Info about this template set
+
+template:
+  name: 'node-coffee'
+  version: '1.0.0'
+
+  # Parent template to include
+  parent: 'node-base'
+
+  # Action on conflict files
+  #  'merge'   Attempt to merge 
+  #  'replace' Default to reaplce existing parent files
+  #  'error'   Error on conflicts
+  #  'rules'   Rely on a rule, error otherwise
+#  parent_conflict: 'error'
+
+
+# ## Properties 
+
+# Properties to be used in template replacements
+
+# These are defaults. Any properties provide in a file of command line
+# will override these. App will warn on any missing.
+
+properties:
+  name: 'base'
+
+# Custom actions to run
+
+actions: []
+
