@@ -6,6 +6,19 @@ Build file from a template set, merging properties in.
 
     npm install deployable-template -g
 
+
+## Templates
+
+Template files use handlebar templates to manage the property substition.
+
+    A >{{ varname }}< gets inserted.
+
+All properties must exist when generating a template, otherwise an error will be thrown 
+You can default a value in a template to:
+
+    {{ default varname 'Some Other Value }}
+
+
 ### Run
 
     dt build node-base \
