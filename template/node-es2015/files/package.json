@@ -4,7 +4,10 @@
   "description": "{{ description }}",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:debug": "DEBUG='*' mocha debug",
+    "babel": "babel ./src/ -d ./lib -s",
+    "babel:watch": "babel ./src --watch -d ./lib -s"
   },
   "repository": {
     "type": "git",
