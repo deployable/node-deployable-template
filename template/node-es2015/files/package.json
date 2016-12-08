@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+{{ git_url }}.git"
+    "url": "git+{{ git_url }}{{ name }}.git"
   },
-  "keywords": {{ json keywords_array_json }},
+  "keywords": {{{ json keywords }}},
   "author": "{{ dev_name }} <{{ dev_email }}>",
   "license": "{{ default module_license 'MIT' }}",
   "bugs": {
-    "url": "{{ git_url }}/issues"
+    "url": "{{ git_url }}{{ name }}/issues"
   },
-  "homepage": "{{ git_url }}#readme",
+  "homepage": "{{ git_url }}{{ name }}#readme",
   "devDependencies": {
     "babel-cli": "~6.16.0",
     "babel-register": "~6.16.3",

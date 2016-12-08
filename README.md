@@ -1,6 +1,6 @@
-# Deployable Templates
+# [Deployable Template](https://github.com/deployable/node-deployable-template)
 
-Build file from a template set, merging properties in.
+Build files from a template set, merging properties in and running actions
 
 ### Install
 
