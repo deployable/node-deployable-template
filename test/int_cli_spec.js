@@ -79,7 +79,7 @@ describe('integration::template::cli', function(){
         debug('bin out', result.stdout)
         debug('bin err', result.stderr)
         let out = result.stdout.join('')
-        expect( out ).to.include( 'Done templating "base"' )
+        expect( out ).to.include( 'Built "base" in "' )
         expect(result).to.have.property('exit').and.equal(0)
       })
     })

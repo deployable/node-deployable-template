@@ -19,7 +19,7 @@ const {{ name }} = require('{{name}}')
 
 ### License
 
-{{ name }} is released under the {{ module_license }} license.
+{{ name }} is released under the {{ default module_license "MIT" }} license.
 Copyright 2016 {{ dev_name }} <{{ dev_email }}>
 
 
