@@ -12,10 +12,4 @@ Promise.config({
   warnings: true
 })
 
-// This might be too far?
-global.fs = Promise.promisifyAll(require('fs'))
-global.fse = Promise.promisifyAll(require('fs-extra'))
-
-
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
-
