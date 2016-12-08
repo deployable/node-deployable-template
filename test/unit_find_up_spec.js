@@ -6,8 +6,8 @@ const path = require('path')
 
 describe('unit::module_template::find_up', function(){
 
-  let desc_test_dir = TestEnv.fixture_path('findup')
-  let desc_test_extra_dir = TestEnv.fixture_path('findup', 'one', 'two')
+  let desc_test_dir = TestEnv.fixturePath('findup')
+  let desc_test_extra_dir = TestEnv.fixturePath('findup', 'one', 'two')
   debug('desc_test_dir', desc_test_dir) 
   
   it('should find up a package.json', function(){

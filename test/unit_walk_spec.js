@@ -5,11 +5,11 @@ const TestEnv = require('./mocha_helpers_env')
 
 describe('unit::module_template::walk', function(){
 
-  let desc_test_dir = TestEnv.fixture_path('walk')
+  let desc_test_dir = TestEnv.fixturePath('walk')
   let desc_test_files = [ 'dir', 'dir/anotherfile', 'file' ]
   
   desc_test_files = [ 'dir/anotherfile', 'file' ]
-  let desc_test_file_paths = desc_test_files.map(el => TestEnv.fixture_path('walk', el) )
+  let desc_test_file_paths = desc_test_files.map(el => TestEnv.fixturePath('walk', el) )
 
   it('should walks files in fixture dir asynchronously',function(done){
     let errors = []

@@ -73,11 +73,16 @@ describe('Unit::template::TemplateSet', function(){
 
     // Create a temp output dir
     before(function(done){
-      fs.mkdtempAsync(TestEnv.tmp_output_dir_prefix).then( tmpdir => {
+      TestEnv.mkdirOutputTmpAsync().then( tmpdir => {
         desc_temp_output_dir = tmpdir
         ts = new TemplateSet('base', { output_path: tmpdir, properties: {name:'-File writing name-'} })
         ts.findTemplateFiles().then(()=> done())
       })
+    })
+
+    // Clean up our tmp output
+    after(function(){
+      return TestEnv.cleanOutputTmpAsync()
     })
 
     it('should write out templates to dir', function(){
@@ -85,10 +90,6 @@ describe('Unit::template::TemplateSet', function(){
         .to.eventually.have.length( 1 )
     })
 
-    // Clean up our tmp output
-    after(function(done){
-      fse.removeAsync(desc_temp_output_dir).then(done)
-    })
 
   })
 
@@ -97,7 +98,7 @@ describe('Unit::template::TemplateSet', function(){
 
     it('should error on missing templates', function(){
       let ts = new TemplateSet('nope')
-      let template_path = TestEnv.base_path('template', 'nope', 'files')
+      let template_path = TestEnv.basePath('template', 'nope', 'files')
       return expect( ts.findTemplateFiles() )
         .to.eventually.be.rejectedWith(Error, `No such file or directory "${template_path}"`)
     })
@@ -108,13 +109,13 @@ describe('Unit::template::TemplateSet', function(){
   describe('Main entry', function(){
 
     after(function(){
-      return TestEnv.clean_output('gotest')
+      return TestEnv.cleanOutputAsync('gotest')
     })
 
     it('should go', function(done){
       let properties = { name: 'main_entry_go_test' }
       let options = {
-        output_path: TestEnv.tmp_output_dir(),
+        output_path: TestEnv.tmpOutputPath(),
         properties: properties
       }
       let ts = new TemplateSet('base', options )

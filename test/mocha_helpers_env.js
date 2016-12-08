@@ -5,9 +5,10 @@
 
 // Setting `DEBUG_CLEAN=true mocha` does't clean up files. Lets you look at them after a test
 
+const Promise = require('bluebird')
 const path = require('path')
 const crypto = require('crypto')
-const fs = require('fs-extra')
+const fse = Promise.promisifyAll(require('fs-extra'))
 const debug = require('debug')('dply::test::helpers::test_env')
 
 
@@ -30,45 +31,110 @@ const TestEnv = module.exports = class TestEnv {
     this.tmp_output_dir_prefix = 'tmp-'
     
     this.path = path
-    this.fs = fs
+    this.fse = fse
   }
 
   // Return a dir from base dir
-  static base_path(...args){
+  static basePath(...args) {
     return path.join(this.base_dir, ...args)
   }
 
   // Return the fixture dir
-  static fixture_path(...args){
+  static fixturePath(...args){
     return path.join(this.fixture_dir, ...args)
   }
 
   // Return the output dir
-  static output_path(...args){
+  static outputPath(...args){
     return path.join(this.output_dir, ...args)
   }
 
   // create a `tmp-<something>` dir in output
-  static tmp_output_dir(suffix){
+  static tmpOutputPath(suffix){
     if (!suffix) suffix = this.random(5)
-    return this.output_path( this.tmp_output_dir_prefix + suffix )
+    return this.outputPath( this.tmp_output_dir_prefix + suffix )
   }
 
-  // return a random base36 string
+  // return a random hex string
   static random(n){
     return crypto.randomBytes(n).toString('hex').slice(0,n)
   }
 
-  static clean(dir){
+  // clean(dir)
+  // clean(outside_dir, force: true)
+  static clean(...args){ return this.cleanAsync(...args) }
+  static cleanAsync(dir, options = {}){
     if (!dir) throw new Error('TestEnvError: No dir to clean')
-    if (process.env.DEBUG_CLEAN) return true
-    debug('cleaning up dir', dir)
-    return fs.removeAsync(dir)
+    if (typeof dir !== 'string') throw new Error(`TestEnvError: directory must be a string. ${typeof dir}`)
+
+    // Be careful when deleting paths
+    let base_path = this.basePath()
+    if ( !dir.startsWith(base_path) && !options.force ) {
+      throw new Error(`TestEnvError: Can't clean outside of project without "force:true" option: ${dir}`)
+    }
+
+    // The environment variable `DEBUG_CLEAN` will turn off deletions
+    if (process.env.DEBUG_CLEAN) {
+      debug('debug would have cleaned up dir "%s"', dir)
+      return Promise.resolve(dir)
+    }
+
+    // Now the actual remove. `rm -rf` equivelant
+    debug('cleaning up dir "%s"', dir)
+    return fse.removeAsync(dir).then(res => {
+      debug('cleaned dir "%s"', dir)
+      return res
+    })
   }
 
-  static clean_output(subdir){
+  static cleanAllOutputAsync(){
+    let dir = this.outputPath()
+    debug('emptying ouput dir', dir)
+    return fse.emptyDir(this.outputPath(dir))
+  }
+
+  static cleanOutputAsync(subdir){
     if (!subdir) throw new Error('TestEnvError: No subdir to clean')
-    return this.clean( this.output_path(subdir) )
+    debug('cleaning up output dir "%s"', subdir)
+    return this.clean( this.outputPath(subdir) )
+  }
+
+  static cleanAllOutputTmpAsync(){
+    return new Promise((resolve, reject) => {
+      let output_dir = this.outputPath()
+      let tmp_prefix = this.tmp_output_dir_prefix
+      debug('cleaning all output tmp- directories dir', output_dir, tmp_prefix)
+
+      var items = [] // files, directories, symlinks, etc
+
+      fse.walk(output_dir)
+        .on('readable', function () {
+          var item
+          while ((item = this.read()) && item.startsWith(tmp_prefix) ) {
+            items.push(item.path)
+          }
+        })
+        .on('end', function () {
+          console.dir(items) // => [ ... array of files]
+          resolve(items)
+        })
+    })
+  }
+  
+  static cleanOutputTmpAsync(suffix){
+    let dir = this.tmpOutputPath(suffix)
+    debug('cleaning up tmp dir', dir)
+    return this.clean( this.outputPath(dir) )
+  }
+
+  static mkdirOutputAsync(...args){
+    let out_dir = this.outputPath(...args)
+    return fse.mkdirsAsync(out_dir)
+  }
+
+  static mkdirOutputTmpAsync(suffix){
+    let out_dir = this.tmpOutputPath(suffix)
+    return fse.mkdirsAsync(out_dir)
   }
 
 }

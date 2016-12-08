@@ -52,11 +52,11 @@ describe('integration::template::cli', function(){
 
   describe('command', function(){
     
-    let desc_bin = TestEnv.base_path('bin', 'dt')
-    let desc_output = TestEnv.tmp_output_dir()
+    let desc_bin = TestEnv.basePath('bin', 'det')
+    let desc_output = TestEnv.tmpOutputPath()
 
     after(function(){
-      return TestEnv.clean(desc_output)
+      return TestEnv.cleanAsync(desc_output)
     })
     
     it('should output help from binary', function(){
