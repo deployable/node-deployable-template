@@ -14,18 +14,21 @@ const debug = require('debug')('dply::test::helpers::test_env')
 
 const TestEnv = module.exports = class TestEnv {
 
-  static join () { path.join(arguments) }
-
   static init () {
 
-    // That app base
-    this.base_dir = path.resolve(__dirname, '..')
+    // The app base bath
+    // This only works when the file is put in the `test/` dir.
+    // If this becomes a node_module it's probably best to get the 
+    // user to pass it on on `init` or move to class `new`
+    this.base_path = path.resolve(__dirname, '..')
     
     // Fixtures in test
-    this.fixture_dir = path.join(__dirname, 'fixture')
+    this.fixture_dir = 'fixture'
+    this.fixture_path = path.join(__dirname, 'fixture')
     
     // Output in test
-    this.output_dir = path.join(__dirname, 'output')
+    this.output_dir = 'output'
+    this.output_path = path.join(__dirname, 'output')
     
     // a tmp- dir in outpu
     this.tmp_output_dir_prefix = 'tmp-'
@@ -34,19 +37,21 @@ const TestEnv = module.exports = class TestEnv {
     this.fse = fse
   }
 
+  static join (...args) { path.join(...args) }
+
   // Return a dir from base dir
   static basePath(...args) {
-    return path.join(this.base_dir, ...args)
+    return path.join(this.base_path, ...args)
   }
 
   // Return the fixture dir
   static fixturePath(...args){
-    return path.join(this.fixture_dir, ...args)
+    return path.join(this.fixture_path, ...args)
   }
 
   // Return the output dir
   static outputPath(...args){
-    return path.join(this.output_dir, ...args)
+    return path.join(this.output_path, ...args)
   }
 
   // create a `tmp-<something>` dir in output
