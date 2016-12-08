@@ -3,6 +3,12 @@
 // Test environment
 // Standard things that all the tests might use
 
+// `fixturePath()`
+
+// `outputPath()`
+
+// `basePath()`
+
 // Setting `DEBUG_CLEAN=true mocha` does't clean up files. Lets you look at them after a test
 
 const Promise = require('bluebird')
@@ -56,17 +62,17 @@ const TestEnv = module.exports = class TestEnv {
 
   // create a `tmp-<something>` dir in output
   static tmpOutputPath(suffix){
-    if (!suffix) suffix = this.random(5)
+    if (!suffix) suffix = this.randomHex(5)
     return this.outputPath( this.tmp_output_dir_prefix + suffix )
   }
 
-  // return a random hex string
-  static random(n){
+  // `randomHex(6)`
+  static randomHex(n){
     return crypto.randomBytes(n).toString('hex').slice(0,n)
   }
 
-  // clean(dir)
-  // clean(outside_dir, force: true)
+  // `clean(dir)`
+  // `clean(outside_dir, force: true)`
   static clean(...args){ return this.cleanAsync(...args) }
   static cleanAsync(dir, options = {}){
     if (!dir) throw new Error('TestEnvError: No dir to clean')
