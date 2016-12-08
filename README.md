@@ -9,7 +9,7 @@ Build files from a template set, merging properties in and running actions
 
 ## Templates
 
-Template files use handlebar templates to manage the property substition.
+Template files use handlebar templates to manage the property substitution.
 
     A >{{ varname }}< gets inserted.
 
@@ -18,6 +18,15 @@ You can default a value in a template to:
 
     {{ default varname 'Some Other Value }}
 
+### Helpers
+
+#### `json`
+
+    { "var": {{ json var }} }
+
+#### `default`
+
+    This is {{ default propname 'Some Value' }} here
 
 ### Run
 
