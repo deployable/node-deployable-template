@@ -1,11 +1,13 @@
 const FindUp = require('../lib/find_up')
 const debug = require('debug')('dply::test::unit::module_template::find_up')
+const TestEnv = require('./mocha_helpers_env')
+const path = require('path')
 
 
 describe('unit::module_template::find_up', function(){
 
-  let desc_test_dir = path.join(__dirname, 'fixture', 'findup')
-  let desc_test_extra_dir = path.join(desc_test_dir, 'one', 'two')
+  let desc_test_dir = TestEnv.fixture_path('findup')
+  let desc_test_extra_dir = TestEnv.fixture_path('findup', 'one', 'two')
   debug('desc_test_dir', desc_test_dir) 
   
   it('should find up a package.json', function(){
@@ -22,8 +24,8 @@ describe('unit::module_template::find_up', function(){
   })
 
   it('should fail on missing dir', function(){
-    return expect( FindUp.dir(desc_test_dir+'no', 'a') )
-      .to.be.rejectedWith(Error)
+    return expect( FindUp.dir(`${desc_test_dir}nope`, 'a') )
+      .to.be.rejectedWith(Error, /nope/)
   })
 
   it('should find up a package.json synchronously',function(){

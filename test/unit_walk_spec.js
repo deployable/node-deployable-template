@@ -1,14 +1,15 @@
 const Walk = require('../lib/walk')
-const debug = require('debug')('dply::test::unit::module_template::walk')
+const debug = require('debug')('dply::test::unit::template::walk')
+const TestEnv = require('./mocha_helpers_env')
 
 
 describe('unit::module_template::walk', function(){
 
-  let desc_test_dir = path.join(__dirname,'fixture','walk')
+  let desc_test_dir = TestEnv.fixture_path('walk')
   let desc_test_files = [ 'dir', 'dir/anotherfile', 'file' ]
   
   desc_test_files = [ 'dir/anotherfile', 'file' ]
-  let desc_test_file_paths = desc_test_files.map(el => path.join(desc_test_dir, el))
+  let desc_test_file_paths = desc_test_files.map(el => TestEnv.fixture_path('walk', el) )
 
   it('should walks files in fixture dir asynchronously',function(done){
     let errors = []
@@ -17,7 +18,6 @@ describe('unit::module_template::walk', function(){
       expect( errors ).to.eql( [] )
       done()
     })
-
   })
 
   it('walks files in fixture dir synchronously',function(){

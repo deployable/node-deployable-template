@@ -1,6 +1,7 @@
 
 const {ConfigFile, ConfigFileError} = require('../lib/config_file')
 const debug = require('debug')('dply::test::unit::template::config_file')
+const path = require('path')
 
 
 describe('unit::template::config_file', function(){
@@ -109,19 +110,19 @@ describe('unit::template::config_file', function(){
       cf = new ConfigFile()
     })
 
-    it('should generate config with space equals',function(){
+    it('should generate config with space equals', function(){
       cf.set('test','val')
       expect( cf.generateFile() ).to.eql( 'test = val' )
     })
 
-    it('should generate config with equals quotes',function(){
+    it('should generate config with equals quotes', function(){
       cf.surround_seperator = ''
       cf.surround_value = '"'
       cf.set('test','val')
       expect( cf.generateFile() ).to.eql( 'test="val"' )
     })
 
-    it('should generate config with colon space',function(){
+    it('should generate config with colon space', function(){
       cf.seperator_prefix = ''
       cf.seperator = ':'
       cf.seperator_suffix = ' '
@@ -129,25 +130,25 @@ describe('unit::template::config_file', function(){
       expect( cf.generateFile() ).to.eql( 'test: val' )
     })
 
-    it('should generate yaml config ',function(){
+    it('should generate yaml config ', function(){
       cf.modeYaml()
       cf.set('test','val')
       expect( cf.generateFile() ).to.eql( 'test: val\n' )
     })
 
-    it('should generate json config ',function(){
+    it('should generate json config ', function(){
       cf.modeJSON()
       cf.set('test','val')
       expect( cf.generateFile() ).to.eql( '{"test":"val"}' )
     })
 
-    it('should generate ini config ',function(){
+    it('should generate ini config ', function(){
       cf.modeIni()
       cf.set('test','val')
       expect( cf.generateFile() ).to.eql( 'test=val' )
     })
 
-    it('should generate ini config ',function(){
+    it('should generate ini config ', function(){
       cf.modeIni()
       cf.set('atest','val1')
       cf.set('test.yep','val2')

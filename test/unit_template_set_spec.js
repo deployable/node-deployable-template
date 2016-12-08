@@ -1,12 +1,10 @@
 const TemplateSet = require('../lib/template_set')
 const debug = require('debug')('dply::test::unit::template::template_set')
 
+const TestEnv = require('./mocha_helpers_env')
+
 
 describe('Unit::template::TemplateSet', function(){
-
-  let desc_fixture_dir = path.join(__dirname, 'fixture')
-  let desc_output_dir = path.join(__dirname, 'output')
-  let desc_tmpoutput_dir_prefix = path.join(desc_output_dir, 'tmp-')
 
 
   describe('Class creation', function(){
@@ -75,7 +73,7 @@ describe('Unit::template::TemplateSet', function(){
 
     // Create a temp output dir
     before(function(done){
-      fs.mkdtempAsync(desc_tmpoutput_dir_prefix).then( tmpdir => {
+      fs.mkdtempAsync(TestEnv.tmp_output_dir_prefix).then( tmpdir => {
         desc_temp_output_dir = tmpdir
         ts = new TemplateSet('base', { output_path: tmpdir, properties: {name:'-File writing name-'} })
         ts.findTemplateFiles().then(()=> done())
@@ -99,9 +97,34 @@ describe('Unit::template::TemplateSet', function(){
 
     it('should error on missing templates', function(){
       let ts = new TemplateSet('nope')
-      let template_path = path.resolve( __dirname, '..', 'template', 'nope', 'files')
+      let template_path = TestEnv.base_path('template', 'nope', 'files')
       return expect( ts.findTemplateFiles() )
         .to.eventually.be.rejectedWith(Error, `No such file or directory "${template_path}"`)
+    })
+
+  })
+
+
+  describe('Main entry', function(){
+
+    after(function(){
+      return TestEnv.clean_output('gotest')
+    })
+
+    it('should go', function(done){
+      let properties = { name: 'main_entry_go_test' }
+      let options = {
+        output_path: TestEnv.tmp_output_dir(),
+        properties: properties
+      }
+      let ts = new TemplateSet('base', options )
+      ts.go().then(res => {
+        expect( res ).to.be.ok
+        expect( res ).to.be.an( 'array' )
+        expect( res[0] ).to.match( /\/tmp-\w+\/README.md/ )
+        done()
+      })
+      .catch(done)
     })
 
   })

@@ -3,7 +3,7 @@ const debug = require('debug')('dply::test::integration::template::cli')
 const yargs = require('yargs')
 const CliCode = require('../lib/cli_code')
 const Cli = require('../lib/cli')
-const path = require('path')
+const TestEnv = require('./mocha_helpers_env')
 
 
 describe('integration::template::cli', function(){
@@ -52,10 +52,15 @@ describe('integration::template::cli', function(){
 
   describe('command', function(){
     
-    let bin = path.resolve( __dirname, '..', 'bin', 'dt' )
+    let desc_bin = TestEnv.base_path('bin', 'dt')
+    let desc_output = TestEnv.tmp_output_dir()
+
+    after(function(){
+      return TestEnv.clean(desc_output)
+    })
     
     it('should output help from binary', function(){
-      return Cli.run(bin).then(result => {
+      return Cli.run(desc_bin).then(result => {
         expect(result).to.have.property('errors').and.to.eql([])
         expect(result).to.have.property('exit').and.equal(1)
         debug('bin out', result.stdout)
@@ -64,6 +69,18 @@ describe('integration::template::cli', function(){
         expect( err ).to.include( '--debug' )
         expect( err ).to.include( '--version' )
         expect( err ).to.include( '--help' )
+      })
+    })
+
+    it('should output help from binary', function(){
+      let args = ['build', 'base', '--name', 'int_command_base', '-o', desc_output]
+      return Cli.run(desc_bin, {args: args}).then(result => {
+        expect(result).to.have.property('errors').and.to.eql([])
+        expect(result).to.have.property('exit').and.equal(0)
+        debug('bin out', result.stdout)
+        debug('bin err', result.stderr)
+        let out = result.stdout.join('')
+        expect( out ).to.include( 'Done templating "base"' )
       })
     })
 
