@@ -37,7 +37,7 @@
     "sinon": "^1.17.6"
   },
   "dependencies": {
-    "bluebird": "^3.0.0",
+    "bluebird": "^3.0.1",
     "debug": "^2",
     "deployable-errors": "^0.5.3",
     "fs-extra": "~1.0.0",
