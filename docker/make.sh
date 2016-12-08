@@ -8,6 +8,7 @@ cd "$rundir"
 NAME=dt
 SCOPE=deployable
 FROM=mhart/alpine-node
+ARGS="${@:-build}"
 
 create_versions(){
   cp Dockerfile.base Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
@@ -50,6 +51,5 @@ run() {
   docker run $SCOPE/$NAME
 }
 
-ARGS="${@:-build}"
+# runit
 $ARGS
-
