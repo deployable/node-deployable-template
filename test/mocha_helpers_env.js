@@ -121,8 +121,8 @@ const TestEnv = module.exports = class TestEnv {
       fse.walk(output_dir)
         .on('readable', function () {
           var item
-          while ((item = this.read()) && item.startsWith(tmp_prefix) ) {
-            items.push(item.path)
+          while ( (item = this.read()) ) {
+            if ( item.startsWith(tmp_prefix) ) items.push(item.path)
           }
         })
         .on('end', function () {
@@ -146,6 +146,31 @@ const TestEnv = module.exports = class TestEnv {
   static mkdirOutputTmpAsync(suffix){
     let out_dir = this.tmpOutputPath(suffix)
     return fse.mkdirsAsync(out_dir)
+  }
+
+
+  // ## Instance
+
+  constructor( base_path ) {
+    this.base_path = base_path
+    this.test_dir = options.test_dir || 'test'
+    this.fixture_dir = options.fixture_dir || 'fixture'
+    this.output_dir = options.output_dir || 'output'
+  }
+
+  // Return the fixture dir
+  get test_path(){
+    return path.join(this.base_path, this.test_dir)
+  }
+
+  // Return the fixture dir
+  get fixture_path(){
+    return path.join(this.base_path, this.test_dir, this.fixture_dir, ...args)
+  }
+
+  // Return the output dir
+  get output_path(){
+    return path.join(this.base_path, this.test_dir, this.output_dir, ...args)
   }
 
 }

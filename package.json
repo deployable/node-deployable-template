@@ -9,7 +9,7 @@
     "test:int": "mocha test/int_*_spec*"
   },
   "bin": {
-    "dt": "lib/cli.js"
+    "det": "lib/cli.js"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/deployable/node-deployable-template#readme",
   "devDependencies": {
-    "babel-cli": "^6.16.0",
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^7.0.0",
-    "babel-register": "^6.16.3",
+    "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "eslint": "^3.8.1",
@@ -45,5 +45,6 @@
     "js-yaml": "~3.7.0",
     "lodash": "~4.17.2",
     "yargs": "~6.5.0"
-  }
+  },
+  "engines" : { "node" : ">=6.0.0" }
 }
