@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "test:unit": "mocha test/unit_*_spec*",
-    "test:int": "mocha test/int_*_spec*"
+    "test:int": "mocha test/int_*_spec*",
+    "pack": "set -uex; cd pkg; pkg=$(npm pack ..) ; cp $pkg deployable-template.tar.gz" 
   },
   "bin": {
     "det": "lib/cli.js"
@@ -46,5 +47,7 @@
     "lodash": "~4.17.2",
     "yargs": "~6.5.0"
   },
-  "engines" : { "node" : ">=6.0.0" }
+  "engines": {
+    "node": ">=6.0.0"
+  }
 }

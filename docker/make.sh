@@ -8,7 +8,9 @@ cd "$rundir"
 NAME=dt
 SCOPE=deployable
 FROM=mhart/alpine-node
+YARN_VERSION=0.18.0
 ARGS="${@:-build}"
+
 
 create_versions(){
   cp Dockerfile.base Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
@@ -16,10 +18,24 @@ create_versions(){
   cp Dockerfile.base Dockerfile.7; perl -pi -e 's/alpine-node:.+/alpine-node:7/' Dockerfile.7
 }
 
+download() {
+  mkdir "$rundir"/../pkg
+  wget -nc -c -O "$rundir/../pkg/yarn-v${YARN_VERSION}.tar.gz" https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
+}
+
+pack(){
+  mkdir -p ../pkg
+  cd ../pkg
+  pkg=$(npm pack ../app)
+  cp $pkg deployable-template.tar.gz
+  cd $rundir
+}
+
 build() {
   local version=${1:-base}
   local tag=${1:-latest}
   docker build \
+    --build-arg YARN_VERSION=${YARN_VERSION} \
     --file $rundir/Dockerfile.$version \
     --tag $SCOPE/$NAME:${tag} \
     $rundir/..
@@ -36,6 +52,7 @@ pull_all(){
 }
 
 rebuild() {
+  pack
   create_versions
   build 
   build 6

@@ -1,0 +1,63 @@
+
+config: 
+  default: build
+  import:
+    - docker
+    - string
+    - number
+    - helper
+
+properties:
+  NAME: dt
+  SCOPE: deployable
+  FROM: mhart/alpine-node
+
+commands:
+  create_versions:
+    - create_version: 6
+    - create_version: 4
+    - create_version: 7
+ 
+  create_version:
+    description: Duplicate an alpine dockerfile to multiple versions
+    args: 
+      version:
+    cmd:
+      - cp Dockerfile.base Dockerfile.{{version}}
+      - perl -pi -e 's/alpine-node:.+/alpine-node:{{version}}/' Dockerfile.{{version}}
+
+  build:
+    args:
+      version: 'base'
+      tag: 'latest'
+    cmd: |
+      docker build \
+        --file {{RUNDIR}}/Dockerfile.{{version}} \
+        --tag {{SCOPE}}/{{NAME}}:{{tag}} \
+        {{RUNDIR}}/..
+
+  pull: pull_tag: 6
+
+  pull_tag: 
+    args:
+     version: 1
+    cmd: docker pull ${FROM}:${version}
+
+  pull_all:
+   - pull_tag: 6
+   - pull_tag: 7
+   - pull_tag: 8
+
+  rebuild:
+   - create_versions:
+   - build: 
+   - build: 6
+   - build: 4
+   - build: 7
+
+  clean: |
+    docker rmi $SCOPE/$NAME
+
+  run: |
+    docker run $SCOPE/$NAME
+

@@ -68,13 +68,11 @@ describe('Unit::template::TemplateSet', function(){
 
   describe('File writing', function(){
 
-    let desc_temp_output_dir = null
     let ts = null
 
     // Create a temp output dir
     before(function(done){
       TestEnv.mkdirOutputTmpAsync().then( tmpdir => {
-        desc_temp_output_dir = tmpdir
         ts = new TemplateSet('base', { output_path: tmpdir, properties: {name:'-File writing name-'} })
         ts.findTemplateFiles().then(()=> done())
       })
@@ -89,7 +87,6 @@ describe('Unit::template::TemplateSet', function(){
       return expect( ts.templateFiles() )
         .to.eventually.have.length( 1 )
     })
-
 
   })
 

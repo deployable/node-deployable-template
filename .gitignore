@@ -1,7 +1,9 @@
-node_modules/
+app/node_modules/
 tmp/
 npm-debug*.log
 yarn-error.log
 *-template-build/
-test/fixture/config.out
-test/output
+app/test/fixture/config.out
+app/test/output
+docker/yarn-*.tar.gz
+pkg/

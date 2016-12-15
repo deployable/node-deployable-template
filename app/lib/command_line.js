@@ -56,7 +56,8 @@ module.exports = function( argv ){
       }
 
       // Normal output
-      console.error('Template command failed:\n\n %s (%s)', error.message, error.name )
+      console.error('Template command failed:\n\n %s (%s)', msg )
+      //console.error('Template command failed:\n\n %s (%s)', error.message, error.name )    
       if ( error && error.description ) console.error(' %s', error.description)
       process.exit(1)
     })

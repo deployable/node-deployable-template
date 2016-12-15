@@ -3,16 +3,20 @@
 from mhart/alpine-node:6
 
 # Use yarn
-run npm install --no-cache --production -g yarn
+arg YARN_VERSION=0.18.0
+env YARN_VERSION=$YARN_VERSION
+add pkg/yarn-v$YARN_VERSION.tar.gz /opt
+run mv /opt/dist /opt/yarn
+#//run npm install --no-cache --production -g yarn
 
 # Install app
-copy . /app
+add app/ /app
 workdir /app
 run set -uex; \
-    yarn install --verbose --prod --cache-folder ./cache; \
-    rm -rf ./cache; \
+    /opt/yarn/bin/yarn install --prod --cache-folder /dev/.yarn-cache; \
+    rm -rf /dev/.yarn-cache; \
     find /app
  
-entrypoint [ "/app/bin/dt" ]
+entrypoint [ "/app/bin/det" ]
 cmd [ "" ]
 

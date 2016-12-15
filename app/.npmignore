@@ -4,4 +4,4 @@ tmp/
 npm-debug*.log
 yarn-error.log
 *-template-build/
-
+pkg/
