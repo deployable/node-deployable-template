@@ -11,7 +11,6 @@ FROM=mhart/alpine-node
 YARN_VERSION=0.18.0
 ARGS="${@:-build}"
 
-
 create_versions(){
   cp Dockerfile.base Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
   cp Dockerfile.base Dockerfile.4; perl -pi -e 's/alpine-node:.+/alpine-node:4/' Dockerfile.4
@@ -23,6 +22,7 @@ download() {
   wget -nc -c -O "$rundir/../pkg/yarn-v${YARN_VERSION}.tar.gz" https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
 }
 
+# Pack the app for docker
 pack(){
   mkdir -p ../pkg
   cd ../pkg
@@ -31,6 +31,7 @@ pack(){
   cd $rundir
 }
 
+# Build the base image
 build() {
   local version=${1:-base}
   local tag=${1:-latest}
@@ -51,8 +52,9 @@ pull_all(){
   docker pull $FROM:4
 }
 
-rebuild() {
-  pack
+# Build everything
+build_all() {
+  #pack
   create_versions
   build 
   build 6

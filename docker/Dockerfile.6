@@ -10,14 +10,13 @@ run mv /opt/dist /opt/yarn
 #//run npm install --no-cache --production -g yarn
 
 # Install app
-add pkg/deployable-template.tar.gz /app
+add app/ /app
 workdir /app
 run set -uex; \
-    rm -rf /app/docker; \
     /opt/yarn/bin/yarn install --prod --cache-folder /dev/.yarn-cache; \
     rm -rf /dev/.yarn-cache; \
     find /app
  
-entrypoint [ "/app/bin/dt" ]
+entrypoint [ "/app/bin/det" ]
 cmd [ "" ]
 
