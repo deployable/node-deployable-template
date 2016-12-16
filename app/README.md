@@ -27,7 +27,7 @@ You can default a value in a template to:
 
     {{ default propname 'Some Other Value' }}
 
-#### Helpers
+#### Template Helpers
 
 ##### `json`
 
