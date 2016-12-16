@@ -43,30 +43,43 @@ Default a property to a value if it is undefined.
 
 ## Examples
 
-### with yaml
+### with set
 
     dt build node-es2015 \
-      --output ./node-es2015-classes \
-      --yaml 'name: es2015 classes\ndescription: New ES2015 Class helpers\n'
+      --name error-classes \
+      --output ./node-error-classes \
+      --set "description=New ES2015 Error Classes"
 
 ### with json
 
     dt build node-es2015 \
-      --output ./node-es2015-classes \
-      --json '{ "name": "es2015 classes", "description": "New ES2015 Class helpers" }'
+      --output ./node-error-classes \
+      --json '{ "name": "error-classes", "description": "New ES2015 Error Classes" }'
 
 ### with file
 
 ```yaml
-name: es2015 classes
-description: New ES2015 Class helpers
+name: error-classes
+description: New ES2015 Error Classes
 ```
 
-    dt build node-express \
-      --output . \
-      --name new-web-app \
+    dt build node-es2015 \
+      --output ./node-error-classes \
       --file ./properties.yml \
-      --set description='Web app to do all the things'
+
+### with file
+
+```json
+{ 
+ "name": "error-classes",
+ "description": "New ES2015 Error Classes"
+}
+```
+
+    dt build node-es2015 \
+      --output ./node-error-classes \
+      --file ./properties.json \
+
 
 ## Help
 
