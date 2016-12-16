@@ -8,7 +8,7 @@ Build files from a template set, merging properties in and running actions
 
 ## Run
 
-    dt build node-base \
+    det build node-base \
       --output ./node-super-project \
       --set name="SuperProject" \
       --set description="Has more lasers than super man" \
@@ -45,14 +45,14 @@ Default a property to a value if it is undefined.
 
 ### with set
 
-    dt build node-es2015 \
+    det build node-es2015 \
       --name error-classes \
       --output ./node-error-classes \
       --set "description=New ES2015 Error Classes"
 
 ### with json
 
-    dt build node-es2015 \
+    det build node-es2015 \
       --output ./node-error-classes \
       --json '{ "name": "error-classes", "description": "New ES2015 Error Classes" }'
 
@@ -63,7 +63,7 @@ name: error-classes
 description: New ES2015 Error Classes
 ```
 
-    dt build node-es2015 \
+    det build node-es2015 \
       --output ./node-error-classes \
       --file ./properties.yml \
 
@@ -76,7 +76,7 @@ description: New ES2015 Error Classes
 }
 ```
 
-    dt build node-es2015 \
+    det build node-es2015 \
       --output ./node-error-classes \
       --file ./properties.json \
 
@@ -84,8 +84,8 @@ description: New ES2015 Error Classes
 ## Help
 
 ```
-$ dt build --help
-Usage: dt build <template>
+$ det build --help
+Usage: det build <template>
 
 Global Options:
   --debug, -d    Debug output                                          [boolean]
@@ -102,7 +102,7 @@ Options:
   --file, -f           Read template properties from a file (YAML or JSON)
 
 Examples:
-  bin/dt build mytemplate   Builds "nu-mod" from "mymod"
+  bin/det build mytemplate   Builds "nu-mod" from "mymod"
 
 ```
 
