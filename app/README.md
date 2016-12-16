@@ -6,7 +6,7 @@ Build files from a template set, merging properties in and running actions
 
     npm install deployable-template -g
 
-### Run
+## Run
 
     dt build node-base \
       --output ./node-super-project \
@@ -16,7 +16,7 @@ Build files from a template set, merging properties in and running actions
       --set dev_email="bob@james.com"
 
 
-### Templates
+## Templates
 
 Template files use handlebar templates to manage the property substitution.
 
@@ -27,35 +27,35 @@ You can default a value in a template to:
 
     {{ default propname 'Some Other Value' }}
 
-#### Template Helpers
+### Template Helpers
 
-##### `json`
+#### `json`
   
 JSON Stringify a property. Useful in JSON files. 
 
     { "someprop": {{ json someprop }} }
 
-##### `default`
+#### `default`
 
 Default a property to a value if it is undefined. 
 
     This is {{ default propname 'Some Value' }} here
 
-### Examples
+## Examples
 
-#### with yaml
+### with yaml
 
     dt build node-es2015 \
       --output ./node-es2015-classes \
       --yaml 'name: es2015 classes\ndescription: New ES2015 Class helpers\n'
 
-#### with json
+### with json
 
     dt build node-es2015 \
       --output ./node-es2015-classes \
       --json '{ "name": "es2015 classes", "description": "New ES2015 Class helpers" }'
 
-#### with file
+### with file
 
     dt build node-express \
       --output . \
@@ -63,7 +63,7 @@ Default a property to a value if it is undefined.
       --file ./properties.yml \
       --set description='Web app to do all the things'
 
-### Help
+## Help
 
 ```
 $ dt build --help
