@@ -6,8 +6,7 @@
   "scripts": {
     "test": "mocha",
     "test:unit": "mocha test/unit_*_spec*",
-    "test:int": "mocha test/int_*_spec*",
-    "pack": "set -uex; cd pkg; pkg=$(npm pack ..) ; cp $pkg deployable-template.tar.gz" 
+    "test:int": "mocha test/int_*_spec*"
   },
   "bin": {
     "det": "lib/cli.js"
@@ -33,13 +32,13 @@
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
-    "eslint": "^3.8.1",
+    "eslint": "^3.12.2",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6"
   },
   "dependencies": {
     "bluebird": "^3.0.1",
-    "debug": "^2",
+    "debug": "^2.4.4",
     "deployable-errors": "^0.5.3",
     "fs-extra": "~1.0.0",
     "handlebars": "~4.0.6",

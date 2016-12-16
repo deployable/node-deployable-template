@@ -8,6 +8,10 @@ For more detailed instructions see the [app readme](https://github.com/deployabl
 
     npm install deployable-template -g
 
+or 
+
+    yarn global add deployable-template
+
 ## Templates
 
 Template files use handlebar templates to manage the property substitution.
