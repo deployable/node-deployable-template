@@ -75,6 +75,20 @@ clean(){
 run() {
   docker run $SCOPE/$NAME
 }
+ 
+publish_docker(){
+  docker push $SCOPE/$NAME
+}
+
+publish_npm(){
+  cd app
+  npm test
+  npm version patch
+  git push
+  npm publish
+  git push --tags
+  cd "$rundir"
+}
 
 help() {
   set +x
