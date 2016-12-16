@@ -1,8 +1,8 @@
-app/node_modules/
+node_modules/
 npm-debug*.log
 yarn-error.log
 *-template-build/
-app/test/fixture/config.out
-app/test/output
+test/fixture/config.out
+test/output
 pkg/
 tmp/

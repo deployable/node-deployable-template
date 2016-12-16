@@ -7,7 +7,7 @@ rundir=$($readlink -f "${0%/*}")
 cd "$rundir"
 
 # Vars
-NAME=dt
+NAME=det
 SCOPE=deployable
 FROM=mhart/alpine-node
 YARN_VERSION=0.18.0
@@ -35,10 +35,17 @@ pack(){
   cd $rundir
 }
 
+package(){
+  mkdir -p pkg
+  # don't use a name or timestamp in gzip so checksums stay the same
+  tar -cvf pkg/deployable-template.tar --exclude .git/ --exclude-from .npmignore . 
+}
+
 # Build the base image
 build() {
   local version=${1:-base}
   local tag=${1:-latest}
+  package
   docker build \
     --build-arg YARN_VERSION=${YARN_VERSION} \
     --file $rundir/docker/Dockerfile.$version \
@@ -83,7 +90,7 @@ publish_docker(){
 publish_npm(){
   cd app
   npm test
-  npm version patch
+  npm version patch -m "Update to %s"
   git push
   npm publish
   git push --tags

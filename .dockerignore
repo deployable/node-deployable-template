@@ -2,5 +2,5 @@ tmp/
 npm-debug*.log
 yarn-error.log
 *-template-build/
-app/node_modules/
-app/test/output/
+node_modules/
+test/output/

@@ -1,6 +1,6 @@
 {
   "name": "deployable-template",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "Generate files from a template and properties",
   "main": "template.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test:int": "mocha test/int_*_spec*"
   },
   "bin": {
-    "det": "lib/cli.js"
+    "det": "app/lib/cli.js"
   },
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "bluebird": "^3.0.1",
-    "debug": "^2.4.4",
+    "debug": "^2",
     "deployable-errors": "^0.5.3",
     "fs-extra": "~1.0.0",
     "handlebars": "~4.0.6",
