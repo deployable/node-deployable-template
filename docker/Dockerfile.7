@@ -1,6 +1,6 @@
 # docker build -f docker/Dockerfile.base -t det .
 #from node:6
-from mhart/alpine-node:6
+from mhart/alpine-node:7
 
 # Use yarn
 arg YARN_VERSION=0.18.0
@@ -11,13 +11,13 @@ run mv /opt/dist /opt/yarn
 
 # Install app
 workdir /app
-copy app/package.json /app/package.json
-copy app/yarn.lock /app/yarn.lock
+copy package.json /app/package.json
+copy yarn.lock /app/yarn.lock
 run set -uex; \
     /opt/yarn/bin/yarn install --prod --cache-folder /dev/.yarn-cache; \
     rm -rf /dev/.yarn-cache; \
     find /app
-add app/ /app
+add pkg/deployable-template.tar /app
  
 entrypoint [ "/app/bin/det" ]
 cmd [ "" ]

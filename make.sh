@@ -15,9 +15,12 @@ ARGS="${@:-build}"
 
 # Commands
 create_versions(){
-  cp docker/Dockerfile.base docker/Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
-  cp docker/Dockerfile.base docker/Dockerfile.4; perl -pi -e 's/alpine-node:.+/alpine-node:4/' Dockerfile.4
-  cp docker/Dockerfile.base docker/Dockerfile.7; perl -pi -e 's/alpine-node:.+/alpine-node:7/' Dockerfile.7
+  cp docker/Dockerfile.base docker/Dockerfile.6
+  perl -pi -e 's/alpine-node:.+/alpine-node:6/' docker/Dockerfile.6
+  cp docker/Dockerfile.base docker/Dockerfile.4
+  perl -pi -e 's/alpine-node:.+/alpine-node:4/' docker/Dockerfile.4
+  cp docker/Dockerfile.base docker/Dockerfile.7
+  perl -pi -e 's/alpine-node:.+/alpine-node:7/' docker/Dockerfile.7
 }
 
 # Download deps
@@ -41,11 +44,15 @@ package(){
   tar -cvf pkg/deployable-template.tar --exclude .git/ --exclude-from .npmignore . 
 }
 
-# Build the base image
 build() {
+  package
+  build_one
+}
+
+# Build the base image
+build_one() {
   local version=${1:-base}
   local tag=${1:-latest}
-  package
   docker build \
     --build-arg YARN_VERSION=${YARN_VERSION} \
     --file $rundir/docker/Dockerfile.$version \
@@ -67,12 +74,12 @@ pull_all(){
 
 # Build everything
 build_all() {
-  #pack
+  package
   create_versions
-  build 
-  build 6
-  build 4
-  build 7
+  build_one
+  build_one 6
+  build_one 4
+  build_one 7
 }
 
 clean(){
