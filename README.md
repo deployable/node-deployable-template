@@ -27,4 +27,3 @@ The app comes with a linux container `deployable/template`
 
     docker/make.sh
 
-
