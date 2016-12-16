@@ -7,7 +7,7 @@ Build files from a template set, merging properties in and running actions
     npm install deployable-template -g
 
 
-## Templates
+### Templates
 
 Template files use handlebar templates to manage the property substitution.
 
@@ -18,13 +18,13 @@ You can default a value in a template to:
 
     {{ default propname 'Some Other Value' }}
 
-### Helpers
+#### Helpers
 
-#### `json`
+##### `json`
 
     { "someprop": {{ json someprop }} }
 
-#### `default`
+##### `default`
 
     This is {{ default propname 'Some Value' }} here
 
