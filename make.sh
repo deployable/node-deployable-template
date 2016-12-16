@@ -76,5 +76,11 @@ run() {
   docker run $SCOPE/$NAME
 }
 
+help() {
+  set +x
+  echo "Commands available in $0:"
+  declare -F | sed 's/declare -f//g'
+}
+
 # runit
 $ARGS
