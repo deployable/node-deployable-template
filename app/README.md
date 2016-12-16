@@ -56,7 +56,7 @@ Default a property to a value if it is undefined.
       --output ./node-error-classes \
       --json '{ "name": "error-classes", "description": "New ES2015 Error Classes" }'
 
-### with file
+### with yaml file
 
 ```yaml
 name: error-classes
@@ -67,7 +67,7 @@ description: New ES2015 Error Classes
       --output ./node-error-classes \
       --file ./properties.yml \
 
-### with file
+### with json file
 
 ```json
 { 
