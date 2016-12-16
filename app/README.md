@@ -6,6 +6,15 @@ Build files from a template set, merging properties in and running actions
 
     npm install deployable-template -g
 
+### Run
+
+    dt build node-base \
+      --output ./node-super-project \
+      --set name="SuperProject" \
+      --set description="Has more lasers than super man" \
+      --set dev_name="Bob James" \
+      --set dev_email="bob@james.com"
+
 
 ### Templates
 
@@ -28,14 +37,7 @@ You can default a value in a template to:
 
     This is {{ default propname 'Some Value' }} here
 
-### Run
-
-    dt build node-base \
-      --output ./node-super-project \
-      --set name="SuperProject" \
-      --set description="Has more lasers than super man" \
-      --set dev_name="Bob James" \
-      --set dev_email="bob@james.com"
+### Examples
 
 #### with yaml
 
