@@ -31,13 +31,13 @@ You can default a value in a template to:
 
 ##### `json`
   
-    JSON Stringify a property. Useful in JSON files. 
+JSON Stringify a property. Useful in JSON files. 
 
     { "someprop": {{ json someprop }} }
 
 ##### `default`
 
-    Default a property to a value if it is undefined. 
+Default a property to a value if it is undefined. 
 
     This is {{ default propname 'Some Value' }} here
 
