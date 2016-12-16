@@ -80,8 +80,8 @@ module.exports = {
         }
       }
     })
-    .example('$0 build mytemplate --name numod', ' "numod" from "mytemplate"')
-    .example('$0 build ../tpl --name numod', ' "numod" from "../tpl"')
+    .example('$0 build mytemplate --name numod', ' Build "numod" from "mytemplate"')
+    .example('$0 build ../tpl --name numod', ' Build "numod" from "../tpl"')
 
     // It seems to duplicate the command?
     .demand(3, 'Must provide a valid template to build - $0 build mytemplate')
