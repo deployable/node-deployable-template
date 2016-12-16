@@ -25,7 +25,7 @@ create_versions(){
 
 # Download deps
 download() {
-  mkdir "$rundir"/pkg
+  mkdir -p "$rundir"/pkg
   wget -nc -c -O "$rundir/pkg/yarn-v${YARN_VERSION}.tar.gz" https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
 }
 

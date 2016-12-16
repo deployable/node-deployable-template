@@ -5,7 +5,7 @@ from mhart/alpine-node:7
 # Use yarn
 arg YARN_VERSION=0.18.0
 env YARN_VERSION=$YARN_VERSION
-add pkg/yarn-v$YARN_VERSION.tar.gz /opt
+add pkg/yarn-v${YARN_VERSION}.tar.gz /opt
 run mv /opt/dist /opt/yarn
 #//run npm install --no-cache --production -g yarn
 
