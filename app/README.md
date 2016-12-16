@@ -57,6 +57,11 @@ Default a property to a value if it is undefined.
 
 ### with file
 
+```yaml
+name: es2015 classes
+description: New ES2015 Class helpers
+```
+
     dt build node-express \
       --output . \
       --name new-web-app \
