@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
 
+# Setup
 set -uexo pipefail
 which greadlink >/dev/null 2>/dev/null && readlink=greadlink || readlink=readlink
 rundir=$($readlink -f "${0%/*}")
 cd "$rundir"
 
+# Vars
 NAME=dt
 SCOPE=deployable
 FROM=mhart/alpine-node
 YARN_VERSION=0.18.0
 ARGS="${@:-build}"
 
+# Commands
 create_versions(){
   cp docker/Dockerfile.base docker/Dockerfile.6; perl -pi -e 's/alpine-node:.+/alpine-node:6/' Dockerfile.6
   cp docker/Dockerfile.base docker/Dockerfile.4; perl -pi -e 's/alpine-node:.+/alpine-node:4/' Dockerfile.4
   cp docker/Dockerfile.base docker/Dockerfile.7; perl -pi -e 's/alpine-node:.+/alpine-node:7/' Dockerfile.7
 }
 
+# Download deps
 download() {
   mkdir "$rundir"/pkg
   wget -nc -c -O "$rundir/pkg/yarn-v${YARN_VERSION}.tar.gz" https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
@@ -42,10 +46,12 @@ build() {
     $rundir
 }
 
+# Pull base image
 pull(){
   docker pull $FROM:6
 }
 
+# Pull all base images
 pull_all(){
   pull
   docker pull $FROM:7
