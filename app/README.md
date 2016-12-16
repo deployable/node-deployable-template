@@ -2,7 +2,7 @@
 
 Build files from a template set, merging properties in and running actions
 
-### Install
+## Install
 
     npm install deployable-template -g
 
