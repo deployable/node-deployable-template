@@ -4,9 +4,9 @@
 
 ### Install
  
-   npm install {{ name }} --save
+    npm install {{ name }} --save
 
-   yarn add {{ name }}
+    yarn add {{ name }}
 
 ### Usage
 
@@ -23,3 +23,4 @@ const {{ name }} = require('{{name}}')
 Copyright 2016 {{ dev_name }} <{{ dev_email }}>
 
 {{ git_url }}{{ name }}
+
