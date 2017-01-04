@@ -9,7 +9,7 @@
     "test:int": "mocha test/int_*_spec*"
   },
   "bin": {
-    "det": "app/lib/cli.js"
+    "det": "bin/det"
   },
   "repository": {
     "type": "git",
