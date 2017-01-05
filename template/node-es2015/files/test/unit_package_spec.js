@@ -1,11 +1,11 @@
-import {{ name }} from '../'
+const {{ name }} = require('../')
 
 describe('Unit::{{ name }}', function(){
 
   describe('{{ name }} does something', function(){
   
     it('should do something with module', function(){
-      expect( module.something ).to.equal( 1 )
+      expect( {{ name }}.something ).to.equal( 1 )
     })
 
   })

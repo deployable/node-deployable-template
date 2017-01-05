@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+{{ git_url }}{{ name }}.git"
+    "url": "git+{{ git_url }}{{ prefix name 'node-' }}.git"
   },
   "keywords": {{{ json keywords }}},
   "author": "{{ dev_name }} <{{ dev_email }}>",
   "license": "{{ default module_license 'MIT' }}",
   "bugs": {
-    "url": "{{ git_url }}{{ name }}/issues"
+    "url": "{{ git_url }}{{ prefix name 'node-' }}/issues"
   },
-  "homepage": "{{ git_url }}{{ name }}#readme",
+  "homepage": "{{ git_url }}{{ default name 'node-' }}#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
