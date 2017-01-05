@@ -20,7 +20,7 @@
     "module",
     "template"
   ],
-  "author": "Matt Hoyle <code@deployable.co>",
+  "author": "Matt Hoyle <code aatt deployable.co>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/deployable/node-deployable-template/issues"
