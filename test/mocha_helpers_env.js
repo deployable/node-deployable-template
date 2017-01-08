@@ -15,7 +15,7 @@ const Promise = require('bluebird')
 const path = require('path')
 const crypto = require('crypto')
 const fse = Promise.promisifyAll(require('fs-extra'))
-const debug = require('debug')('dply::test::helpers::test_env')
+const debug = require('debug')('dply:test:helpers:test_env')
 
 
 const TestEnv = module.exports = class TestEnv {
