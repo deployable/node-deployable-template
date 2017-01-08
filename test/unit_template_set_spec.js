@@ -42,6 +42,49 @@ describe('Unit::template::TemplateSet', function(){
   })
 
 
+  describe('Handlebars helpers', function(){
+
+    let Handlebars = TemplateSet.Handlebars
+
+    it('should replace {{ default prop "some value" }}', function(){
+      let template = Handlebars.compile('{{ default prop "some value" }}', this.handlebar_options)
+      let output = template({prop: 'one'})
+      expect( output ).to.equal( 'one' ) 
+    })
+    it('should default {{ default prop "some value" }}', function(){
+      let template = Handlebars.compile('{{ default prop "some value" }}', this.handlebar_options)
+      let output = template({})
+      expect( output ).to.equal( 'some value' )
+    })
+
+    // Add `{{ prefix prop "string" }}` helper
+    it('should template {{ prefix prop "string" }}', function(){
+      let template = Handlebars.compile('{{ prefix prop "string" }}', this.handlebar_options)
+      let output = template({prop: 'one'})
+      expect( output ).to.equal( 'stringone' ) 
+    })
+
+    // Add `{{ suffix prop "string" }}` helper
+    it('should template {{ suffix prop "string" }}', function(){
+      let template = Handlebars.compile('{{ suffix prop "string" }}', this.handlebar_options)
+      let output = template({prop: 'one'})
+      expect( output ).to.equal( 'onestring' ) 
+    })
+
+    // Add `{{ json prop }}` to handlebars
+    it('should template {{ json prop }}', function(){
+      let template = Handlebars.compile('{{{ json prop }}}', this.handlebar_options)
+      let output = template({prop: ['one']})
+      expect( output ).to.equal( '["one"]' ) 
+    })
+    it('should not template {{ json prop }} for a nil value', function(){
+      let template = Handlebars.compile('{{{ json prop }}}', this.handlebar_options)
+      let fn = ()=> template({prop: undefined})
+      expect( fn ).to.throw( Error, /helper recieved undefined value for/ ) 
+    })
+
+  })
+
   describe('Templating', function(){
 
     let ts = null
