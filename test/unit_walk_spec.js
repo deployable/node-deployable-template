@@ -1,5 +1,5 @@
 const Walk = require('../lib/walk')
-const debug = require('debug')('dply::test::unit::template::walk')
+const debug = require('debug')('dply:test:unit:template:walk')
 const TestEnv = require('./mocha_helpers_env')
 
 
@@ -25,6 +25,16 @@ describe('unit::module_template::walk', function(){
     let files = Walk.dirSync(desc_test_dir, errors)
     expect( files ).to.eql( desc_test_file_paths )
     expect( errors ).to.eql( [] )
+  })
+
+  it('findfiles',function(){
+    let files = Walk.findFiles(desc_test_dir)
+    return expect( files ).to.eventually.become( desc_test_file_paths )
+  })
+
+  it('findfiles',function(){
+    let files = Walk.findFiles(desc_test_dir+'no')
+    return expect( files ).to.be.rejectedWith( Error, 'No such file or directory' )
   })
 
 })
