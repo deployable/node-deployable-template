@@ -1,4 +1,4 @@
-const debug = require('debug')('dply:test:unit:stack')
+const debug = require('debug')('dply:test:unit:template:stack')
 const TestEnv = require('./mocha_helpers_env')
 const Stack = require('../lib/stack')
 
@@ -6,7 +6,7 @@ function originalError(){
   return new Error('original')
 }
 
-describe('unit::module_template::walk', function(){
+describe('unit::template::stack', function(){
 
   let base_path = TestEnv.basePath()
 
