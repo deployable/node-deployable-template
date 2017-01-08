@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "test:unit": "mocha test/unit_*_spec*",
-    "test:int": "mocha test/int_*_spec*"
+    "test:int": "mocha test/int_*_spec*",
+    "test:coverage": "istanbul cover _mocha"
   },
   "bin": {
     "det": "bin/det"
