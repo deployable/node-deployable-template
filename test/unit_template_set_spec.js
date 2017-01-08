@@ -1,5 +1,5 @@
 const TemplateSet = require('../lib/template_set')
-const debug = require('debug')('dply::test::unit::template::template_set')
+const debug = require('debug')('dply:test:unit:template:template_set')
 
 const TestEnv = require('./mocha_helpers_env')
 
@@ -123,6 +123,26 @@ describe('Unit::template::TemplateSet', function(){
         done()
       })
       .catch(done)
+    })
+
+  })
+
+
+  describe('Special . file handling for npm', function(){
+
+    let ts = null
+    let ts_properties = {}
+    let ts_path = TestEnv.fixturePath()
+
+    before(function(done) {
+      ts = new TemplateSet('template_with_.gitignore', { base_path: ts_path, properties: ts_properties })
+      ts.findTemplateFiles().then(()=> done())
+    })
+
+    it('should replace {{properties}} in a template', function(){
+      expect(ts.files).to.include('.dot.gitignore')
+      return expect( ts.templateFile(ts.files[0]) )
+        .to.become('agitignore\n')
     })
 
   })
