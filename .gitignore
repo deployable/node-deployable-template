@@ -4,6 +4,6 @@ npm-debug*.log
 yarn-error.log
 *-template-build/
 test/fixture/config.out
-test/output
+test/output/
 pkg/
 tmp/

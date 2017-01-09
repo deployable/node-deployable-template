@@ -1,10 +1,12 @@
 node_modules/
-docker/
-tmp/
+coverage/
 npm-debug*.log
 yarn-error.log
 *-template-build/
-pkg/
+test/fixture/config.out
 test/output/
+pkg/
+tmp/
+docker/
 make.sh
 
