@@ -8,20 +8,10 @@ cd "$rundir"
 
 # Vars
 NAME={{ name }}
-SCOPE=deployable
-FROM=mhart/alpine-node
-YARN_VERSION=0.18.0
+SCOPE={{ scope }}
+FROM="mhart/alpine-node:6.9.4"
+YARN_VERSION=0.18.1
 ARGS="${@:-build}"
-
-# Commands
-create_versions(){
-  cp docker/Dockerfile.base docker/Dockerfile.6
-  perl -pi -e 's/alpine-node:.+/alpine-node:6/' docker/Dockerfile.6
-  cp docker/Dockerfile.base docker/Dockerfile.4
-  perl -pi -e 's/alpine-node:.+/alpine-node:4/' docker/Dockerfile.4
-  cp docker/Dockerfile.base docker/Dockerfile.7
-  perl -pi -e 's/alpine-node:.+/alpine-node:7/' docker/Dockerfile.7
-}
 
 # Download deps
 download() {
@@ -37,57 +27,42 @@ download() {
 package(){
   mkdir -p pkg
   # don't use a name or timestamp in gzip so checksums stay the same
-  tar -cvf pkg/deployable-template.tar --exclude .git/ --exclude pkg/ --exclude-from .npmignore . 
+  tar -cvf pkg/{{ name }}.tar --exclude .git/ --exclude pkg/ --exclude-from .npmignore . 
 }
 
 build() {
-  package
+  #package
   build_one
 }
 
 # Build the base image
 build_one() {
-  local version=${1:-base}
   local tag=${1:-latest}
   docker build \
     --build-arg YARN_VERSION=${YARN_VERSION} \
-    --file $rundir/docker/Dockerfile.$version \
+    --file $rundir/docker/Dockerfile \
     --tag $SCOPE/$NAME:${tag} \
     $rundir
 }
 
 # Pull base image
 pull(){
-  docker pull $FROM:6
-}
-
-# Pull all base images
-pull_all(){
-  pull
-  docker pull $FROM:7
-  docker pull $FROM:4
-}
-
-# Build everything
-build_all() {
-  package
-  create_versions
-  build_one
-  build_one 6
-  build_one 4
-  build_one 7
+  docker pull $FROM
 }
 
 clean(){
-  docker rmi $SCOPE/$NAME
+  local tag=${1:-latest}
+  docker rmi $SCOPE/$NAME:$tag
 }
 
 run() {
-  docker run $SCOPE/$NAME
+  local tag=${1:-latest}
+  docker run $SCOPE/$NAME:$tag
 }
  
 publish_docker(){
-  docker push $SCOPE/$NAME
+  local tag=${1:-latest}
+  docker push $SCOPE/$NAME:$tag
 }
 
 publish_npm(){
