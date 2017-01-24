@@ -1,14 +1,16 @@
 # [{{ name }}]({{ git_url }}{{ name }})
 
+## Title
+
 {{ description }}
 
-### Install
+## Install
  
     npm install {{ name }} --save
 
     yarn add {{ name }}
 
-### Usage
+## Usage
 
 ```javascript
 
@@ -17,10 +19,11 @@ const {{ name }} = require('{{name}}')
 
 ```
 
-### License
+## About
 
 {{ name }} is released under the {{ default module_license "MIT" }} license.
-Copyright 2016 {{ dev_name }} <{{ dev_email }}>
+
+Copyright 2016 {{ dev_name }} - {{ dev_email }}
 
 {{ git_url }}{{ name }}
 
