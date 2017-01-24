@@ -68,7 +68,8 @@ const TestEnv = module.exports = class TestEnv {
 
   // `randomHex(6)`
   static randomHex(n){
-    return crypto.randomBytes(n).toString('hex').slice(0,n)
+    let bytes = Math.ceil(n/2)
+    return crypto.randomBytes(bytes).toString('hex').slice(0,n)
   }
 
   // `clean(dir)`
