@@ -1,8 +1,7 @@
 const cli = require('../lib/command_line')
 const debug = require('debug')('dply::test::integration::template::cli')
 const yargs = require('yargs')
-const CliCode = require('../lib/cli_code')
-const Cli = require('../lib/cli')
+const { CliCode, Cli } = require('@deployable/test-cli')
 const TestEnv = require('./mocha_helpers_env')
 
 
@@ -68,7 +67,7 @@ describe('integration::template::cli', function(){
         expect( err ).to.match( /--debug/ )
         expect( err ).to.include( '--version' )
         expect( err ).to.include( '--help' )
-        expect(result).to.have.property('exit').and.equal(1)
+        expect(result).to.have.property('exit_code').and.equal(1)
       })
     })
 
@@ -80,7 +79,7 @@ describe('integration::template::cli', function(){
         debug('bin err', result.stderr)
         let out = result.stdout.join('')
         expect( out ).to.include( 'Built "base" in "' )
-        expect(result).to.have.property('exit').and.equal(0)
+        expect(result).to.have.property('exit_code').and.equal(0)
       })
     })
 
