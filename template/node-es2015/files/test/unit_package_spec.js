@@ -1,11 +1,17 @@
-const Something = require('../')
+const { Something, VERSION } = require('../')
 
 describe('Unit::{{ name }}', function(){
 
-  describe('Something does something', function(){
+  describe('require', function(){
   
-    it('should do something with module', function(){
-      expect( Something.something() ).to.equal( 1 )
+    it('should load the Something class', function(){
+      expect( Something ).to.be.ok
+    })
+
+    it('should export a package VERSION', function(){
+      expect( VERSION ).to.be.ok
+      expect( VERSION ).to.be.a.string
+      expect( VERSION ).to.match(/^\d+\.\d+\.\d+/)
     })
 
   })

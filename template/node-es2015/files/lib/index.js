@@ -1,20 +1,7 @@
 // # Something
 
-//const something = require('./something')
+const { Something } = require('./something')
+const VERSION = require('../package.json').version
 
-// ## class Something
-
-module.exports = class Something {
-
-  // `new Something({test: true})`
-  constructor ( options = {} ) {
-
-  }
-
-  // `#something()`
-  static something() {
-    return 1
-  }
-
-}
+module.exports = { Something, VERSION }
 

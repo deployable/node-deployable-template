@@ -4,11 +4,13 @@
   "description": "{{ description }}",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
-    "test:debug": "DEBUG='*' mocha debug",
+    "test": "mocha test/unit* test/int*",
+    "test:unit": "mocha test/unit*",
+    "test:int": "mocha test/int*",
+    "test:debug": "DEBUG='dply:*' mocha debug",
     "test:coverage": "istanbul cover _mocha && istanbul check-coverage",
-    "npm:pubtest": "set -uex; npm test; npm version prerelease; npm publish --tag testing",
-    "npm:publish": "set -uex; npm run test:coverage; [ -z \"$(git status --porcelain)\" ]; npm version patch; git push; npm publish; git push --tags"
+    "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access public",
+    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish --access public; git push --tags"
   },
   "repository": {
     "type": "git",

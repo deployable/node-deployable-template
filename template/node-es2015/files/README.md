@@ -6,9 +6,10 @@
 
 ## Install
  
+    yarn add {{ name }}
+
     npm install {{ name }} --save
 
-    yarn add {{ name }}
 
 ## Usage
 
