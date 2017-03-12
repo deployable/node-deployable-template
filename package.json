@@ -7,7 +7,7 @@
     "test": "mocha test/unit* test/int*",
     "test:unit": "mocha test/unit_*_spec*",
     "test:int": "mocha test/int_*_spec*",
-    "test:coverage": "istanbul cover _mocha",
+    "test:coverage": "istanbul cover _mocha && istanbul check-coverage",
     "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access public",
     "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish --access public; git push --tags"
   },
