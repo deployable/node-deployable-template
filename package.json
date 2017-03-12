@@ -1,6 +1,6 @@
 {
   "name": "deployable-template",
-  "version": "0.3.0-1",
+  "version": "0.3.0",
   "description": "Generate files from a template and properties",
   "main": "template.js",
   "scripts": {
